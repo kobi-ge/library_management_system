@@ -22,19 +22,19 @@ class Library:
     def _book_in_library(self,book_isbn):
         for book in self.book_list:
             if book.get_isbn_book() == book_isbn:
-                return True
+                return book
         else:
-            return False
+            return None
 
     def borrow_book(self, user_id, book_isbn):
         if self._user_in_library(user_id):
-            for book in self.book_list:
-                if book.get_isbn_book() == book_isbn:
-                    if book.book_loan():
-                        return book
-                    else:
-                        print('book not available')
-                        return None
+            book = self._book_in_library(book_isbn)
+            if book :
+                if book.book_loan():
+                    return book
+                else:
+                    print('book not available')
+                    return None
             else:
                 print('book not found')
                 return None
