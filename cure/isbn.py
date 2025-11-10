@@ -1,6 +1,7 @@
 import random
 
 class Isbn:
+    counter = 0
     def __init__(self):
         self.prefix = '978'
         self.body = self.generate_random_body()
@@ -8,7 +9,8 @@ class Isbn:
         self.isbn = self.prefix + self.body + str(self.check_digit)
 
     def generate_random_body(self):
-        return ''.join(str(random.randint(1,9)) for _ in range(9))
+        self.counter += 1
+        return ''.join(str(random.randint(1,8)) for _ in range(9)) + str(self.counter)
 
     def calculate_check_digit(self, base):
         total = 0
