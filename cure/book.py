@@ -8,6 +8,9 @@ class Book:
         self._isbn = isbn
         self.is_available = True
 
+    def get_book_title(self):
+        return self._title
+
     def get_isbn_book(self):
         return self._isbn
 

@@ -17,6 +17,7 @@ class Isbn:
             total += int(digit) * factor
         remainder = total % 10
         return (10 - remainder) if remainder != 0 else 0
+
     def __str__(self):
         return f'{self.isbn}'
 
