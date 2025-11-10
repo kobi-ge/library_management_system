@@ -5,8 +5,8 @@ class ConvertToPython:
         self.data = data
 
     def json_to_python(self):
-        python_data = json.loads(self.data)
-        return python_data
+        self.data = json.loads(self.data)
+        return self.data
 
     def get_data_from_dict(self):
         self.data = self.data["data"]
@@ -15,7 +15,7 @@ class ConvertToPython:
 class ConvertToJson:
     def __init__(self, data):
         self.data = data
-        self.type = type(data)
+        self.type = type(data).__name__
 
     def convert_to_dict(self):
         self.data = {"data": self.data ,"type": self.type}
