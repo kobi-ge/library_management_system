@@ -17,6 +17,9 @@ class Book:
     def get_book_author(self):
         return self._author
 
+    def check_is_available(self):
+        return self.is_available
+
     def book_loan(self):
         if self.is_available:
             self.is_available = False
