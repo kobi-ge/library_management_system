@@ -1,4 +1,5 @@
 import json
+from files_handling.log_to_file import LogFiles
 
 class ConvertToPython:
     def __init__(self, data):
@@ -8,19 +9,31 @@ class ConvertToPython:
         self.data = json.loads(self.data)
         return self.data
 
+class GetData:
+    def __init__(self, data):
+        self.data = data
+
     def get_data_from_dict(self):
         self.data = self.data["data"]
         return self.data
 
-class ConvertToJson:
+
+
+class ConvertToDict:
     def __init__(self, data):
         self.data = data
-        self.type = type(data).__name__
+        self.type = type(self.data).__name__
 
-    def convert_to_dict(self):
+    def conversion(self):
         self.data = {"data": self.data ,"type": self.type}
         return self.data
 
-    def python_to_json(self):
+class DictToJson:
+    def __init__(self, data):
+        self.data = data
+        self.type = type(self.data["data"]).__name__
+
+    def conversion(self):
         json_data = json.dumps(self.data)
-        return json_data
+        return json_data, self.type
+

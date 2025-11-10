@@ -4,11 +4,13 @@ class LogFiles:
         self.data = data
         self.users_file = None
         self.books_file = None
+        self.create_users_file()
+        self.create_books_file()
 
     def create_users_file(self):
         try:
             with open("users_list.json", "x") as users_file:
-                self.users_file = users_file
+                self.users_file = "users_list.json"
         except FileExistsError:
             print(f"file{self.users_file} already exists")
 
@@ -21,6 +23,6 @@ class LogFiles:
 
     def log_files(self):
         file_name = self.users_file
-        with open(file_name, "a") as file:
+        with open("users_list.json", "a") as file:
             file.write(f"{self.data}\n")
 
