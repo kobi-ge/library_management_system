@@ -14,9 +14,19 @@ class Book:
     def get_isbn_book(self):
         return self._isbn
 
-    def borrow_book(self):
+    def get_book_author(self):
+        return self._author
+
+    def book_loan(self):
         if self.is_available:
             self.is_available = False
+            return True
+        else:
+            return False
+
+    def book_returning(self):
+        if not self.is_available:
+            self.is_available = True
             return True
         else:
             return False
