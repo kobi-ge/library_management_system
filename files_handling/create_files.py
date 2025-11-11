@@ -20,3 +20,4 @@ class CreateFiles:
         for file_name in range(2):
             self.set_name(file_name)
             self.create_file()
+
