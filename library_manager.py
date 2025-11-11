@@ -4,11 +4,12 @@ from cure.isbn import Isbn
 from cure.user import User
 
 class Manager:
-    correct_answer = ['1', '2', '7']
+    correct_answer = ['1','2','3','7']
 
     def __init__(self):
         self.library = Library()
         self.server_on = True
+
     def analyze_choice(self,choice):
         if choice == '1':
             book_info = self.get_book_info()
@@ -22,6 +23,9 @@ class Manager:
             new_user = User(user_info[0],user_info[1])
 
             self.library.add_user(new_user)
+
+        elif choice == '3':
+            self.library.borrow_book()
 
         elif choice == '7':
             self.server_on = False
@@ -57,6 +61,20 @@ class Manager:
             if not author.isalpha():
                 continue
             return title,author
+    def login(self):
+        while True:
+            user_name = input('enter your name')
+            if user_name.isalpha():
+                user_id = input('enter you id number')
+                if user_id.isdigit():
+                    if self.library.user_in_library(user_id):
+                        return True
+                    else:
+                        return False
+                else:
+                    print('not valid id')
+            else:
+                print('name not valid')
 
     def get_user_choice(self):
         while True:

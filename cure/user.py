@@ -2,7 +2,7 @@
 
 class User:
 
-    def __init__(self, name:str, user_id:int):
+    def __init__(self, name:str, user_id:str):
         self._name = name
         self._user_id = user_id
         self.borrowed_books = []

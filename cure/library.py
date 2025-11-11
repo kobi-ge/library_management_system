@@ -7,19 +7,20 @@ class Library:
         self.book_list = []
 
     def add_book(self,book):
+        # remove we need adding to the file
         self.book_list.append(book)
 
     def add_user(self,user):
         self.users_list.append(user)
 
-    def _user_in_library(self,user_id):
+    def user_in_library(self, user_id):
         for user in self.users_list:
             if user.get_id() == user_id:
                 return True
         else:
             return False
 
-    def _book_in_library(self,book_isbn):
+    def book_in_library(self, book_isbn):
         for book in self.book_list:
             if book.get_isbn_book() == book_isbn:
                 return book
@@ -27,8 +28,8 @@ class Library:
             return None
 
     def borrow_book(self, user_id, book_isbn):
-        if self._user_in_library(user_id):
-            book = self._book_in_library(book_isbn)
+        if self.user_in_library(user_id):
+            book = self.book_in_library(book_isbn)
             if book :
                 if book.book_loan():
                     return book
@@ -43,7 +44,7 @@ class Library:
             return None
 
     def return_book(self, user_id, book_isbn):
-        if self._user_in_library(user_id):
+        if self.user_in_library(user_id):
             for book in self.book_list:
                 if book.get_isbn_book() == book_isbn:
                     if book.book_returning():
