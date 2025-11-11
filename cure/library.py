@@ -1,8 +1,8 @@
 
 
 class Library:
-    def __init__(self):
-
+    def __init__(self,name_library):
+        self.name_library = name_library
         self.users_list = []
         self.book_list = []
 
@@ -20,44 +20,39 @@ class Library:
         else:
             return False
 
-    def book_in_library(self, book_isbn):
+    def book_in_library(self, book_title):
         for book in self.book_list:
-            if book.get_isbn_book() == book_isbn:
+            if book.get_book_title() == book_title:
                 return book
         else:
             return None
 
-    def borrow_book(self, user_id, book_isbn):
+    def borrow_book(self, user_id, book_title):
         if self.user_in_library(user_id):
-            book = self.book_in_library(book_isbn)
+            book = self.book_in_library(book_title)
             if book :
                 if book.book_loan():
-                    return book
+                    self.users_list.append(book)
                 else:
                     print('book not available')
-                    return None
             else:
                 print('book not found')
-                return None
         else:
             print('user not exits')
-            return None
 
     def return_book(self, user_id, book_isbn):
         if self.user_in_library(user_id):
             for book in self.book_list:
                 if book.get_isbn_book() == book_isbn:
                     if book.book_returning():
-                        return True
+                        self.users_list.remove(book)
                     else:
                         print('Already returned')
-                        return None
             else:
                 print('book is not exist')
-                return None
         else:
             print('user not exist')
-            return None
+
 
     def list_available_books(self):
         return [book for book in self.book_list if book.is_available]
