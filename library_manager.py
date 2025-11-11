@@ -27,12 +27,14 @@ class Manager:
             new_book = Book(book_info[0],book_info[1],isbn)
 
             self.library.add_book(new_book)
+            print('adding book')
 
         elif choice == '2':
             user_info = get_user_info()
             new_user = User(user_info[0], user_info[1])
 
             self.library.add_user(new_user)
+            print('adding user')
 
         elif choice == '3':
             # tuple name and id
@@ -40,7 +42,7 @@ class Manager:
             if self.login(user_info[1]):
             # book name
                 book_info = get_book_info()
-                self.library.borrow_book(user_info[1], book_info)
+                self.library.borrow_book(user_info[1], book_info[0])
             else:
                 print('you are not user.')
 
@@ -48,7 +50,7 @@ class Manager:
             user_info = get_user_info()
             if self.login(user_info[1]):
                 book_info = get_book_info()
-                self.library.return_book(user_info[1], book_info)
+                self.library.return_book(user_info[1], book_info[0])
 
         elif choice == '7':
             self.server_on = False
@@ -76,7 +78,7 @@ def get_user_info():
         if name.isalpha():
             user_id = input('enter your id')
             if  user_id.isdigit():
-                return name , int(user_id)
+                return name , user_id
             else:
                 print('not valid id')
         else:
@@ -91,7 +93,7 @@ def get_book_info():
         if title.isalpha():
             author = input('enter author')
             if  author.isalpha():
-                return title
+                return title ,author
             else:
                 print('not valid author')
         else:

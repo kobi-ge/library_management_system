@@ -28,11 +28,13 @@ class Library:
             return None
 
     def borrow_book(self, user_id, book_title):
+        print(f'{self.list_available_books()}')
         if self.user_in_library(user_id):
             book = self.book_in_library(book_title)
             if book :
                 if book.book_loan():
                     self.users_list.append(book)
+                    print('book borrowed')
                 else:
                     print('book not available')
             else:
@@ -40,14 +42,16 @@ class Library:
         else:
             print('user not exits')
 
-    def return_book(self, user_id, book_isbn):
+    def return_book(self, user_id, book_title):
+        print(f'{self.list_available_books()}')
         if self.user_in_library(user_id):
-            for book in self.book_list:
-                if book.get_isbn_book() == book_isbn:
-                    if book.book_returning():
-                        self.users_list.remove(book)
-                    else:
-                        print('Already returned')
+            book = self.book_in_library(book_title)
+            if book :
+                if book.book_returning():
+                    self.users_list.remove(book)
+                    print('remove book')
+                else:
+                    print('Already returned')
             else:
                 print('book is not exist')
         else:
@@ -57,23 +61,23 @@ class Library:
     def list_available_books(self):
         return [book for book in self.book_list if book.is_available]
 
-    def search_book_by_title(self, title):
-        for book in self.book_list:
-            if book.get_book_title() == title:
-                print('book found')
-                print(book)
-                return book
-        else:
-            print('book not exist')
-            return None
-
-    def search_by_author(self,author):
-        for book in self.book_list:
-            if book.get_book_author() == author:
-                print('book found')
-                print(book)
-                return book
-        else:
-            print('book not exist')
-            return None
+    # def search_book_by_title(self, title):
+    #     for book in self.book_list:
+    #         if book.get_book_title() == title:
+    #             print('book found')
+    #             print(book)
+    #             return book
+    #     else:
+    #         print('book not exist')
+    #         return None
+    #
+    # def search_by_author(self,author):
+    #     for book in self.book_list:
+    #         if book.get_book_author() == author:
+    #             print('book found')
+    #             print(book)
+    #             return book
+    #     else:
+    #         print('book not exist')
+    #         return None
 
